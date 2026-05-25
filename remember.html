@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Up, Up and Away - C64 Graphics Explorer</title>
+    <link rel="icon" type="image/png" href="favico.png">
+    <meta name="description"
+        content="A personal memory of a Commodore 64 hot-air-balloon sprite, with images and references.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-neutral-950 text-neutral-100 font-sans antialiased">
+
+    <nav class="sticky top-0 z-50 w-full px-6">
+        <div
+            class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-neutral-950 via-neutral-950/80 to-transparent pointer-events-none">
+        </div>
+        <div class="relative py-6 max-w-3xl mx-auto">
+            <a href="index.html"
+                class="group inline-flex items-center gap-2 text-neutral-400 bg-neutral-900 px-4 py-2 rounded-lg hover:bg-neutral-800 hover:text-white transition-all">
+                <img src="arrow_left.svg" alt=""
+                    class="w-5 h-5 invert opacity-70 group-hover:opacity-100 transition-opacity" aria-hidden="true">
+
+            </a>
+        </div>
+    </nav>
+
+    <main class="px-6 pt-12 pb-16 sm:pb-24">
+        <article class="max-w-3xl mx-auto">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight mb-10">Up, Up and Away</h1>
+
+            <div class="space-y-6 text-neutral-300 leading-relaxed">
+                <p>
+                    Who remembers this?
+                </p>
+            </div>
+
+            <figure class="my-8">
+                <img src="remember_1.webp" alt="Instructions how to work with sprites on the C64"
+                    class="rounded-2xl w-full">
+            </figure>
+
+            <div class="space-y-6 text-neutral-300 leading-relaxed">
+                <p>
+                    One of my defining childhood memories was typing this in (or typing it in together), watching the
+                    balloon appear on screen, and seeing it drift across:
+                </p>
+
+                <figure class="my-8">
+                    <div class="relative aspect-video rounded-2xl overflow-hidden">
+                        <video class="absolute inset-0 w-full h-full object-cover" controls playsinline
+                            preload="metadata" poster="balloon_preview.jpg">
+                            <source src="balloon.mp4" type="video/mp4">
+                            Your browser does not support video playback.
+                        </video>
+                    </div>
+                    <figcaption class="text-neutral-500 text-sm mt-3 text-center">
+
+                        <a href="https://www.youtube.com/watch?v=tRoVBsZcYiI" target="_blank" rel="noopener noreferrer"
+                            class="underline hover:text-neutral-200">
+                            Video source
+                        </a>
+                    </figcaption>
+                </figure>
+
+                <p>
+                    Later, the manual introduced a POKE instruction that could even enlarge the little sprite (if
+                    you are curious,
+                    <a href="c64-users_guide-06-sprite_graphics.pdf" target="_blank" rel="noopener noreferrer"
+                        class="underline hover:text-neutral-200">
+                        here is the relevant chapter</a>).
+                    Experiencing this 40 years ago felt truly magical. It is almost impossible to explain from today's
+                    perspective, where design feels soft and overprocessed everywhere and AI talks back at us, but back
+                    then this was graphics.
+                </p>
+
+                <p>
+                    (At least in Hungary. By the mid-to-late '80s the Amiga 500 had already started showing up, and
+                    EGA game graphics were around too, but for us little idiots the C64 remained the computer for
+                    years.)
+                </p>
+
+                <p>
+                    Back then it felt like no other machine was needed. Why would you need one, when typing a few lines
+                    could put an "un-eraseable" hot-air balloon on your screen?
+                </p>
+
+                <p>
+                    I do not have any tattoos, but if I ever get one,
+                    this is exactly what I would want to wear:
+                </p>
+            </div>
+
+            <figure class="my-10">
+                <img src="remember_2.webp" alt="C64 hot-air-balloon sprite" class="rounded-2xl w-full max-w-md mx-auto">
+            </figure>
+
+            <div class="space-y-6 text-neutral-300 leading-relaxed">
+                <p>
+                    An unbelievable piece. I was inside that 21x24 "hires" sprite pixel grid, written into
+                    memory with POKE instructions, with READ-DATA pairs, with the RUN command, the un-eraseable sprite
+                    on
+                    the screen, on that dirty little monitor that we could never calibrate to the right colors.
+                </p>
+
+                <p>
+                    That was entirely me: light-blue balloon sprite on a blue background. I watched it for hours as it
+                    went down awkwardly, then jumped back to the start. Nothing else was ever that carefree. Never.
+                </p>
+
+                <p>The best graphics in the world.</p>
+                <p>On the best computer in the world.</p>
+
+            </div>
+
+            <hr class="border-neutral-800 mt-16 mb-4">
+            <p class="text-neutral-500 text-sm">
+                Originally published in Hungarian on
+                <a href="https://plastik.substack.com/p/up-up-and-away" target="_blank" rel="noopener noreferrer"
+                    class="underline hover:text-neutral-200">Plastik media</a>, June 14, 2024.
+            </p>
+        </article>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C64 Graphics Explorer — View C64 graphics the authentic way</title>
+    <link rel="icon" type="image/png" href="favico.png">
+    <meta name="description"
+        content="A macOS app for exploring Commodore 64 graphics with authentic CRT display simulation, intelligent color palette mapping, and pixel-level inspection tools.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-neutral-950 text-neutral-100 font-sans antialiased">
+
+    <!-- Header -->
+    <header class="flex flex-col items-center px-6 py-14 sm:py-20">
+        <div class="max-w-2xl text-center">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-16">
+                C64 Graphics Explorer
+            </h1>
+            <p class="text-lg sm:text-xl text-neutral-400 mb-12 max-w-xl mx-auto leading-relaxed">
+                Authentic CRT simulation and pixel inspection tool for enjoying artwork made for the Commodore 64.
+            </p>
+        </div>
+        <div class="mb-10 max-w-7xl w-full">
+            <img src="app_hero.png" alt="C64 Graphics Explorer app interface" class="w-full h-auto">
+        </div>
+        <div class="max-w-2xl text-center">
+            <a href="https://apps.apple.com/app/c64-graphics-explorer/id6759177386"
+                class="inline-flex items-center gap-2 bg-white text-neutral-900 px-6 py-3 rounded-full font-semibold hover:bg-neutral-200 transition-colors">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                Download for macOS (free)
+            </a>
+            <p class="text-sm text-neutral-500 mt-4">Requires macOS Sequoia 15.0+ and Apple Silicon, sample images
+                included</p>
+        </div>
+    </header>
+
+    <hr class="border-neutral-800 max-w-5xl mx-6 sm:mx-auto">
+
+
+    <!-- How does it work? -->
+    <section class="px-6 py-10 sm:py-20">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-16">What does it do?</h2>
+
+
+
+            <div class="max-w-2xl mx-auto space-y-4 pb-4 sm:pb-8">
+                <p class="text-neutral-400 leading-relaxed">
+                    This app lets you explore the modern Commodore 64 art scene and see how artists are still pushing
+                    the limits of this 43-year-old platform.
+                </p>
+                <p class="text-neutral-400 leading-relaxed">
+                    Pick an image from the curated gallery and see how it was made — character blocks, sprite layers,
+                    all of it rendered through an authentic CRT simulation.
+                </p>
+                <p class="text-neutral-400 leading-relaxed">
+                    You can also bring your own images. Drag and drop them in and the app will map them to the
+                    Colodore palette.
+                </p>
+                <p class="text-neutral-400 leading-relaxed max-w-2xl mx-auto">
+                    Modern pieces often leave you wondering: <em>how the hell did they get away with these impossible
+                        limits?</em></p>
+                <p class="text-neutral-400 leading-relaxed max-w-2xl mx-auto">
+                    That's the correct mindset.
+                </p>
+            </div>
+            <img src="mirage.jpg" alt="Mirage artwork in C64 Graphics Explorer" class="rounded-2xl w-full mt-8">
+            <div class="text-neutral-600 text-sm mt-4 text-center">A masterclass in working within limits. By <a
+                    href="https://csdb.dk/release/?id=187021" target="_blank" rel="noopener noreferrer"
+                    class="underline hover:text-neutral-200">Lars
+                    Verhoeff (Mirage)</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="border-neutral-800 max-w-5xl mx-6 sm:mx-auto">
+
+    <!-- Manifesto -->
+    <section id="manifesto" class="px-6 py-10 sm:py-20">
+        <div class="max-w-2xl mx-auto">
+
+            <p class="text-neutral-400 leading-relaxed mb-6">
+                There is an inherent beauty in the pixel graphics of the Commodore 64.
+            </p>
+            <p class="text-neutral-400 leading-relaxed mb-6">
+                The original, somewhat washed-out color set emerged from a small team working on the VIC chip: with
+                direct control over hue, saturation, and luminance, the colors were chosen largely by instinct.
+            </p>
+            <p class="text-neutral-400 leading-relaxed mb-6">
+                These colors, combined with the strict limitations on
+                how they could be used gave rise to an entire era of artists who hadn't stopped in the early '90's when
+                the Commodore 64 begun to fade.
+            </p>
+            <p class="text-neutral-400 leading-relaxed mb-6">
+                These limits became a new norm, a canonical part of life for those who grew up with this
+                8-bit
+                platform producing not only pixel art, but code and music.
+            </p>
+            <img src="balloon.png" width="45" height="63" id="balloon" class="mt-10"
+                style="image-rendering: pixelated; transition: transform 5s linear; cursor: pointer;">
+        </div>
+    </section>
+
+
+    <hr class="border-neutral-800 max-w-5xl mx-6 sm:mx-auto">
+
+    <!-- Features -->
+    <section class="px-6 py-10 sm:py-20">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-16">C64 Graphics Explorer Features</h2>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="bg-[#33358a] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="gallery.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-lg">Built-in Gallery</h3>
+                    <p class="text-neutral-200 text-sm leading-relaxed">
+                        Curated collection of C64 artwork that showcases some of the very best this platform has to
+                        offer. We even have support for interlaced and multi screen images (only in the sample sidebar
+                        for now).
+
+                        Explore <a href="https://c64gfx.com" target="_blank" rel="noopener noreferrer"
+                            class="underline hover:text-neutral-200">c64gfx.com</a> to get more images to test with.
+                    </p>
+
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-[#7a4797] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="display.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-lg">Authentic CRT Simulation</h3>
+                    <p class="text-neutral-200 text-sm leading-relaxed">
+                        Pepto's <a href="https://www.colodore.com" target="_blank" rel="noopener noreferrer"
+                            class="underline hover:text-neutral-200">Colodore</a>
+                        filter with scanlines, Hanover bars,
+                        chroma subsampling, and
+                        configurable
+                        gamma. It's very close to the VICE emulation experience and you can even tweak it to your
+                        liking.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-[#d3d379] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="loupe.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-neutral-800 text-lg">Loupe for the pixel connoisseur</h3>
+                    <p class="text-neutral-800 text-sm leading-relaxed">
+                        Magnifying loupe with 8×8 character grid overlay. Reveals the exact colors in each character
+                        block. The app uses simple heuristics to detect the global background color and highlight it in
+                        the loupe.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-[#b2e298] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="mode_select.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-neutral-800 text-lg">Mode Detection</h3>
+                    <p class="text-neutral-800 text-sm leading-relaxed">
+                        Automatically detects Hires (2 colors per block), Multicolor (up to 4 colors per block where
+                        one is the global background), and even Hires Multicolor (interlace) modes.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-[#6c9751] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="palette.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-lg">Intelligent Palette Mapping</h3>
+                    <p class="text-neutral-200 text-sm leading-relaxed">
+                        For your own images it automatically finds the best match to the real C64's 16 colors. If we
+                        fail to identify, you can manually reassign colors.
+                    </p>
+
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-[#544f51] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="grid.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-neutral-200 text-lg">Adjustable Pixel Grid</h3>
+                    <p class="text-neutral-200 text-sm leading-relaxed">
+                        For images with borders you don't need a graphics tool to fix
+                        improper placement, just align the grid manually over the 320×200 area using cursor keys.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <hr class="border-neutral-800 max-w-5xl mx-6 sm:mx-auto">
+
+    <!-- Contact -->
+    <section class="px-6 pt-10 sm:pt-20 pb-10">
+        <div class="max-w-2xl mx-auto bg-neutral-900 rounded-2xl px-8 py-10 text-center">
+            <div class="flex justify-center mb-6">
+                <img src="mail.svg" alt="" class="w-12 h-12 invert opacity-70" aria-hidden="true">
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-6">Contact support</h2>
+            <p class="text-neutral-400 mt-12 mb-6">
+                If you have questions about this app or need support, <a href="mailto:strains-grip-4h@icloud.com"
+                    class="text-neutral-200 underline hover:text-white transition-colors">send an email</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="px-6 pb-10">
+        <div class="max-w-2xl mx-auto bg-neutral-900 rounded-2xl px-8 py-10 text-center">
+            <div class="flex justify-center mb-6">
+                <img src="privacy.svg" alt="" class="w-12 h-12 invert opacity-70" aria-hidden="true">
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-6">Privacy Policy</h2>
+            <p class="text-neutral-400 mt-12 mb-6">
+                We don't collect any data. Your images stay on your Mac. <a href="privacy.html"
+                    class="text-neutral-200 underline hover:text-white transition-colors">Read the full policy</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="px-6 pt-10 pb-20">
+        <div class="max-w-5xl mx-auto text-center text-neutral-500 text-sm">
+            <p class="mb-2">© 2026 József "angelday" Schaffer</p>
+            <p>Website last updated: 2026 Feb</p>
+
+        </div>
+    </footer>
+
+    <script>
+        // C64 Palette (RGB values)
+        const c64Palette = [
+            [0x04, 0x01, 0x01],  // 00 black
+            [0x33, 0x35, 0x8a],  // 01 blue
+            [0x56, 0x41, 0x01],  // 02 brown
+            [0x76, 0x3d, 0x4b],  // 03 red
+            [0x54, 0x4f, 0x51],  // 04 dark gray
+            [0x7a, 0x47, 0x97],  // 05 purple
+            [0x82, 0x56, 0x38],  // 06 orange
+            [0x79, 0x74, 0x76],  // 07 gray
+            [0x6e, 0x71, 0xc4],  // 08 light blue
+            [0xaa, 0x70, 0x7c],  // 09 light red
+            [0x6c, 0x97, 0x51],  // 0a green
+            [0xac, 0xa7, 0xa9],  // 0b light gray
+            [0x8e, 0xb5, 0xac],  // 0c cyan
+            [0xd3, 0xd3, 0x79],  // 0d yellow
+            [0xb2, 0xe2, 0x98],  // 0e light green
+            [0xfd, 0xfd, 0xfc],  // 0f white
+        ];
+
+        const colorRamp = [2, 2, 3, 3, 5, 5, 7, 7, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 14, 14, 7, 7, 5, 5, 3, 3, 2, 2];
+
+        let rampOffset = 0;
+
+        function getRampColor(index) {
+            const rampIndex = (index + rampOffset) % colorRamp.length;
+            const paletteIndex = colorRamp[rampIndex];
+            const color = c64Palette[paletteIndex];
+            return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        }
+
+        function updateColors(spans, button) {
+            spans.forEach((span, i) => {
+                span.style.color = getRampColor(i);
+            });
+            // Button cycles through the ramp
+            if (button) {
+                button.style.backgroundColor = getRampColor(0);
+            }
+            rampOffset++;
+            setTimeout(() => updateColors(spans, button), 40);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const h1 = document.querySelector('h1');
+            const text = h1.textContent.trim();
+
+            // Wrap each character (including spaces) in a span
+            h1.innerHTML = text.split('').map(char => {
+                if (char === ' ') {
+                    return '<span>&nbsp;</span>';
+                }
+                return `<span>${char}</span>`;
+            }).join('');
+
+            const spans = h1.querySelectorAll('span');
+            const button = document.querySelector('a[href="https://apps.apple.com/app/c64-graphics-explorer/id6759177386"]');
+            updateColors(spans, button);
+
+            // Balloon game - timer and scoring
+            const balloon = document.getElementById('balloon');
+            let timerInterval = null;
+            let startTime = null;
+            let gameStarted = false;
+            let gameOver = false;
+
+            // Create timer display
+            const timer = document.createElement('div');
+            timer.className = 'fixed bottom-5 right-5 text-2xl font-bold font-mono hidden z-[9999]';
+            document.body.appendChild(timer);
+
+            function updateTimer() {
+                const elapsed = (Date.now() - startTime) / 1000;
+                timer.textContent = elapsed.toFixed(1) + 's';
+                // Use C64 white from palette for timer color
+                const c64White = c64Palette[15];
+                timer.style.color = `rgb(${c64White[0]}, ${c64White[1]}, ${c64White[2]})`;
+            }
+
+            function animateTimerToCenter() {
+                const overlay = document.createElement('div');
+                overlay.className = 'fixed inset-0 bg-black z-[9998]';
+                overlay.style.opacity = '0';
+                overlay.style.transition = 'opacity 0.8s ease-in-out';
+                document.body.appendChild(overlay);
+                requestAnimationFrame(() => { overlay.style.opacity = '0.8'; });
+
+                // "Your score was:" label — fixed above center
+                const label = document.createElement('div');
+                label.textContent = 'Your score was:';
+                label.className = 'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-[80px] text-lg font-mono text-neutral-100 whitespace-nowrap transition-opacity duration-500 ease-in-out z-[9999]';
+                label.style.opacity = '0';
+                document.body.appendChild(label);
+
+                // Buttons — fixed below center
+                const buttons = document.createElement('div');
+                buttons.className = 'fixed left-1/2 top-1/2 -translate-x-1/2 translate-y-[70px] lg:translate-y-[60px] z-[9999] flex flex-col lg:flex-row gap-4 w-[88vw] max-w-[320px] lg:w-auto lg:max-w-none items-center justify-center transition-opacity duration-700 ease-in-out';
+                buttons.style.opacity = '0';
+                document.body.appendChild(buttons);
+
+                const playAgainBtn = document.createElement('button');
+                playAgainBtn.textContent = 'Play again';
+                playAgainBtn.className = 'inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-white text-neutral-900 border border-white hover:bg-neutral-300 hover:border-neutral-300 transition-colors w-full lg:w-auto';
+                playAgainBtn.addEventListener('click', () => {
+                    location.hash = 'manifesto';
+                    location.reload();
+                });
+                buttons.appendChild(playAgainBtn);
+
+                const familiarBtn = document.createElement('a');
+                familiarBtn.textContent = 'This balloon looks familiar...';
+                familiarBtn.href = 'remember.html';
+                familiarBtn.className = 'inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-white bg-black/50 border border-white/70 hover:bg-black/90 hover:border-white/50 hover:text-neutral-400 transition-colors no-underline w-full lg:w-auto';
+                buttons.appendChild(familiarBtn);
+
+                // Fly the original timer to center
+                const rect = timer.getBoundingClientRect();
+                const dx = (window.innerWidth / 2) - (rect.left + rect.width / 2);
+                const dy = (window.innerHeight / 2) - (rect.top + rect.height / 2);
+                let revealStarted = false;
+                const revealScoreUI = () => {
+                    if (revealStarted) return;
+                    revealStarted = true;
+                    timer.style.transition = 'none';
+                    label.style.opacity = '1';
+
+                    let blinks = 0;
+                    const blinkInterval = setInterval(() => {
+                        timer.style.visibility = timer.style.visibility === 'hidden' ? 'visible' : 'hidden';
+                        blinks++;
+                        if (blinks >= 10) {
+                            clearInterval(blinkInterval);
+                            timer.style.visibility = 'visible';
+                            requestAnimationFrame(() => { buttons.style.opacity = '1'; });
+                        }
+                    }, 300);
+                };
+
+                timer.addEventListener('transitionend', (event) => {
+                    if (event.propertyName === 'transform') {
+                        revealScoreUI();
+                    }
+                }, { once: true });
+
+                // Fallback for browsers where transitionend may not fire reliably.
+                setTimeout(revealScoreUI, 950);
+
+                timer.style.transition = 'transform 0.8s ease-in-out';
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        timer.style.transform = `translate(${dx}px, ${dy}px) scale(2)`;
+                    });
+                });
+            }
+
+            function checkBalloonExit() {
+                const rect = balloon.getBoundingClientRect();
+                const isOffScreen = rect.right < 0 || rect.left > window.innerWidth ||
+                    rect.bottom < 0 || rect.top > window.innerHeight;
+                if (isOffScreen && !gameOver) {
+                    gameOver = true;
+                    clearInterval(timerInterval);
+                    animateTimerToCenter();
+                }
+            }
+
+            balloon.addEventListener('mouseenter', () => {
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 150;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                balloon.style.transform = `translate(${x}vw, ${y}vh)`;
+
+                // Start timer on first hover
+                if (!gameStarted) {
+                    gameStarted = true;
+                    startTime = Date.now();
+                    timer.style.display = 'block';
+                    timerInterval = setInterval(() => {
+                        updateTimer();
+                        checkBalloonExit();
+                    }, 100);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
