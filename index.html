@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C64 Graphics Explorer — View C64 graphics the authentic way</title>
+    <link rel="icon" type="image/png" href="favico.png">
+    <meta name="description"
+        content="Authentic CRT simulation and pixel inspection tool for enjoying artwork made for the Commodore 64.">
+    <link rel="stylesheet" href="styles.css?v=20260812-3">
+    <script src="link-runtime.js" defer></script>
+</head>
+
+<body class="bg-neutral-950 text-neutral-100 font-sans antialiased">
+
+    <!-- Header -->
+    <header class="flex flex-col items-center px-6 py-14 sm:py-20">
+        <div class="max-w-2xl text-center">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-16">
+                C64 Graphics Explorer
+            </h1>
+            <p class="text-lg sm:text-xl text-neutral-400 mb-12 max-w-xl mx-auto leading-relaxed">
+                Authentic CRT simulation and pixel inspection tool for enjoying artwork made for the Commodore 64.
+            </p>
+        </div>
+        <div class="mb-10 max-w-7xl w-full">
+            <img src="app_hero.png" alt="C64 Graphics Explorer app interface" class="w-full h-auto">
+        </div>
+        <div class="max-w-2xl text-center">
+            <a href="https://apps.apple.com/app/c64-graphics-explorer/id6759177386"
+                class="download-button inline-flex items-center gap-2 bg-white text-neutral-900 px-6 py-3 rounded-full font-semibold hover:bg-neutral-200 transition-colors">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                Download for macOS (free)
+            </a>
+            <p class="text-sm text-neutral-500 mt-4">Requires macOS Sequoia 15.0+ and Apple Silicon, sample images
+                included</p>
+        </div>
+    </header>
+
+    <hr class="border-neutral-800 max-w-5xl mx-6 sm:mx-auto">
+
+
+    <!-- How does it work? -->
+    <section class="px-6 py-10 sm:py-20">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-16">What does it do?</h2>
+
+
+
+            <div class="max-w-2xl mx-auto space-y-4 pb-4 sm:pb-8">
+                <p class="text-neutral-400 leading-relaxed">
+                    This app lets you explore Commodore 64 graphics in all their forms, from original games to today’s
+                    art scene, and see how artists are still pushing the limits of this <span id="platform-age" data-release-year="1982"
+                        data-release-month="8">44</span>-year-old platform.
+                </p>
+                <p class="text-neutral-400 leading-relaxed max-w-2xl mx-auto">
+                    Modern pieces often leave you wondering: <em>how the hell did they get away with these impossible
+                        limits?</em></p>
+
+            </div>
+            <img src="mirage.png" alt="Mirage artwork in C64 Graphics Explorer" class="rounded-2xl w-full mt-8">
+            <div class="text-neutral-600 text-sm mt-4 text-center">A masterclass in working within limits as rendered by
+                C64 Graphics Explorer. Art by <a href="https://csdb.dk/release/?id=187021" target="_blank"
+                    rel="noopener noreferrer" class="underline hover:text-neutral-200">Lars
+                    Verhoeff (Mirage)</a>
+            </div>
+        </div>
+    </section>
+
+    <hr class="border-neutral-800 max-w-5xl mx-6 sm:mx-auto">
+
+    <!-- What's new in 2.0 -->
+    <section id="whats-new" class="whats-new px-6 py-10 sm:py-20">
+        <div class="max-w-5xl mx-auto">
+            <div class="whats-new-intro max-w-2xl mx-auto text-center">
+                <h2 id="whats-new-title" class="text-2xl sm:text-3xl font-bold">What’s new in 2.0</h2>
+                <p class="whats-new-lead text-lg leading-relaxed">
+                    C64 Graphics Explorer is now both a file converter and an authentic viewing experience.
+                </p>
+            </div>
+
+            <div class="whats-new-viewer release-group">
+                <h3 class="text-xl font-semibold">Viewer</h3>
+                <ul class="release-points">
+                    <li>
+                        <strong>The whole display subsystem is new.</strong> It is rebuilt from the ground up using
+                        Pepto’s
+                        <a href="https://www.colodore.com" target="_blank" rel="noopener noreferrer"
+                            class="underline hover:text-neutral-200">Colodore</a> model. The colors are built the way
+                        the
+                        VIC-II builds them, starting from the color index rather than guessing backwards from RGB.
+                    </li>
+                    <li>
+                        <strong>Measured against Colodore captures, all sixteen colors match exactly.</strong> Across
+                        the entire image, no individual RGB value differs from the reference by more than four levels
+                        out of 255, or 1.6%. Out of the box, the defaults are tuned to match VICE’s CRT output.
+                    </li>
+                    <li>
+                        <strong>2× and 3×, switched on the fly.</strong> All artwork renders at either scale, changed
+                        live
+                        with the <kbd>2</kbd> and <kbd>3</kbd> keys, sharp at rest and animated in between. True Aspect is on by default, both
+                        VIC-II generations are available, and calibration follows a Commodore 1084S front panel.
+                    </li>
+                    <li>
+                        <strong>Two modes.</strong> Pixels shows the raw source pixels the image is made of. Display
+                        shows
+                        how a C64 actually puts it on screen. <kbd>Space</kbd> crosses between them, and the loupe works in both.
+                    </li>
+                    <li>
+                        <strong>Interlaced artwork, first-party.</strong> Drop Phase A and Phase B together to
+                        reconstruct
+                        the artist’s intended picture. In Display, the pair always vibrates at the PAL rate. That is not
+                        the app giving up: the real machine was never able to hold those pictures still.
+                    </li>
+                    <li>
+                        <strong>C64GFX support.</strong> Paste a
+                        <a href="https://c64gfx.com" target="_blank" rel="noopener noreferrer"
+                            class="underline hover:text-neutral-200">c64gfx.com artwork</a> address with
+                        <kbd>Shift+Cmd+O</kbd>
+                        and the picture opens in the app, interlaced artwork included as a real pair. Or press
+                        <kbd>Cmd+R</kbd> and
+                        get a random popular one.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="release-columns">
+                <div class="release-group">
+                    <h3 class="text-xl font-semibold">Importer</h3>
+                    <ul class="release-points">
+                        <li>
+                            <strong>Canonical images load straight in.</strong> Opening starts by checking whether the
+                            image already carries the canonical C64 palette. If it does, there is nothing to review.
+                        </li>
+                        <li>
+                            <strong>Everything else gets the import review.</strong> It opens showing the Remapped
+                            colors.
+                            Press <kbd>Space</kbd> to flip to Original and compare, then drag a swatch to another index if the
+                            automatic choice was mistaken.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="release-group">
+                    <h3 class="text-xl font-semibold">Converter</h3>
+                    <ul class="release-points">
+                        <li>
+                            <strong>Save what the artwork is made of or how it looks.</strong> An indexed image is a
+                            true
+                            16-color PNG in canonical C64 order. A rendered image is the view exactly as it sits on
+                            screen: current mode, scale, calibration, True Aspect, and chip revision.
+                        </li>
+                        <li>
+                            <strong>Interlaced artwork exports too.</strong> Choose a blended PNG for the picture your
+                            eye
+                            actually mixes the two phases into, or an animated GIF for the flickering performance
+                            itself.
+                        </li>
+                        <li>
+                            <strong>Set up the view you want and hit Save.</strong> True Aspect, either VIC-II revision,
+                            nearest-neighbor pixels, CRT rendering, and Layer Notes™ all export at 2× or 3×. Interlaced
+                            Layer Notes™ can become an animated GIF.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="release-group release-open-format">
+                <h3 class="text-xl font-semibold">Layered images, fully open</h3>
+                <p class="release-prose leading-relaxed">
+                    The layered image format is published as an
+                    <a href="https://github.com/angelday/c64-layered-image-format" target="_blank"
+                        rel="noopener noreferrer" class="underline hover:text-neutral-200">open specification</a>,
+                    with three worked examples beside it. Make your own Layer Notes™ and view them in the app.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="border-neutral-800 max-w-5xl mx-6 sm:mx-auto">
+
+    <!-- Manifesto -->
+    <section id="manifesto" class="px-6 py-10 sm:py-20">
+        <div class="max-w-2xl mx-auto">
+
+            <p class="text-neutral-400 leading-relaxed mb-6">There is an inherent beauty in the pixel graphics of the Commodore 64.</p>
+            <p class="text-neutral-400 leading-relaxed mb-6">The original, somewhat washed-out color set emerged from a small team working on the VIC chip: with direct control over hue, saturation, and luminance, the colors were chosen largely by instinct.</p>
+            <p class="text-neutral-400 leading-relaxed mb-6">These colors, combined with the strict limitations on how they could be used gave rise to an entire era of artists who hadn’t stopped in the early ’90s when the Commodore 64 begun to fade.</p>
+            <p class="text-neutral-400 leading-relaxed mb-6">These limits became a new norm, a canonical part of life for those who grew up with this 8-bit platform producing not only pixel art, but code and music.</p>
+            <img src="balloon.png" width="45" height="63" id="balloon" class="relative z-50 mt-10"
+                style="image-rendering: pixelated; transition: transform 5s linear; cursor: pointer;">
+        </div>
+    </section>
+
+
+    <hr class="border-neutral-800 max-w-5xl mx-6 sm:mx-auto">
+
+    <!-- Features -->
+    <section class="px-6 py-10 sm:py-20">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-16">C64 Graphics Explorer Features</h2>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Open artwork -->
+                <div class="bg-[#33358a] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="gallery.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-lg">Gallery, Files &amp; C64GFX</h3>
+                    <p class="text-neutral-200 text-sm leading-relaxed">
+                        Start with the built-in collection, open your own files, or paste an artwork link from
+                        <a href="https://c64gfx.com" target="_blank" rel="noopener noreferrer"
+                            class="underline hover:text-neutral-200">c64gfx.com</a>. Layered, interlaced, and
+                        multiscreen samples reveal how ambitious C64 pictures are put together.
+                    </p>
+
+                </div>
+
+                <!-- Display rendering -->
+                <div class="bg-[#7a4797] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="display.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-lg">Authentic C64 Display</h3>
+                    <p class="text-neutral-200 text-sm leading-relaxed">
+                        A rebuilt display pipeline based on Pepto’s <a href="https://www.colodore.com" target="_blank"
+                            rel="noopener noreferrer" class="underline hover:text-neutral-200">Colodore</a>
+                        model renders from the original color indices. Switch live between 2× and 3×, use True Aspect,
+                        choose either VIC-II revision, and tune the display like a Commodore 1084S.
+                    </p>
+                </div>
+
+                <!-- Inspection tools -->
+                <div class="bg-[#d3d379] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="loupe.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-neutral-800 text-lg">Loupe &amp; Character Grid</h3>
+                    <p class="text-neutral-800 text-sm leading-relaxed">
+                        Inspect the source pixels and exact color indices inside every 8×8 character cell. The loupe
+                        works in both viewing modes, even while interlaced artwork is moving, and the grid can be
+                        aligned
+                        to bordered images.
+                    </p>
+                </div>
+
+                <!-- Viewing modes -->
+                <div class="bg-[#b2e298] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="mode_select.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-neutral-800 text-lg">Pixels &amp; Display</h3>
+                    <p class="text-neutral-800 text-sm leading-relaxed">
+                        Pixels shows the clean picture the artist intended; Display shows what C64 hardware could
+                        actually put on screen. Cross between them with <kbd>Space</kbd> and see interlaced artwork alternate at
+                        the original PAL rate.
+                    </p>
+                </div>
+
+                <!-- Import and remapping -->
+                <div class="bg-[#6c9751] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="palette.svg" alt="" class="w-[30px] h-[30px] opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-lg">Smart Import &amp; Remapping</h3>
+                    <p class="text-neutral-200 text-sm leading-relaxed">
+                        Canonical C64 images open directly. Other artwork gets a visual review with automatic mapping
+                        to the 16-color palette, draggable corrections, and Hires, Multicolor, or Hires Multicolor
+                        analysis.
+                    </p>
+
+                </div>
+
+                <!-- Export -->
+                <div class="bg-[#544f51] rounded-2xl p-6 space-y-3 transition-all duration-300 hover:scale-105">
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <img src="export.svg" alt="" class="w-[30px] h-[30px] invert opacity-80" aria-hidden="true">
+                    </div>
+                    <h3 class="font-semibold text-neutral-200 text-lg">Export What You See</h3>
+                    <p class="text-neutral-200 text-sm leading-relaxed">
+                        Save a canonical indexed PNG or the rendered view with its current scale, aspect, calibration,
+                        chip revision, and visible layers. Interlaced artwork can become a blended PNG or a looping GIF.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <hr class="border-neutral-800 max-w-5xl mx-6 sm:mx-auto">
+
+    <!-- Contact -->
+    <section class="px-6 pt-10 sm:pt-20 pb-10">
+        <div class="max-w-2xl mx-auto bg-neutral-900 rounded-2xl px-8 py-10 text-center">
+            <div class="flex justify-center mb-6">
+                <img src="mail.svg" alt="" class="w-12 h-12 invert opacity-70" aria-hidden="true">
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-6">Contact support</h2>
+            <p class="text-neutral-400 mt-12 mb-6">
+                If you have questions about this app or need support, <a href="#"
+                    data-link-token="fhPPt2JKAaQ06NmTdiQDcAOm9JdSMXlRAPq6nFGSfi0Ax6As2IR2"
+                    class="text-neutral-200 underline hover:text-white transition-colors">send an email</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Privacy -->
+    <section class="px-6 pb-10">
+        <div class="max-w-2xl mx-auto bg-neutral-900 rounded-2xl px-8 py-10 text-center">
+            <div class="flex justify-center mb-6">
+                <img src="privacy.svg" alt="" class="w-12 h-12 invert opacity-70" aria-hidden="true">
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold mb-6">Privacy Policy</h2>
+            <p class="text-neutral-400 mt-12 mb-6">
+                We don’t collect any data. Your images stay on your Mac. <a href="privacy.html"
+                    class="text-neutral-200 underline hover:text-white transition-colors">Read the full policy</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="px-6 pt-10 pb-20">
+        <div class="max-w-5xl mx-auto text-center text-neutral-500 text-sm">
+            <p class="mb-2">
+                By <a href="https://jozsefschaffer.com/" target="_blank" rel="noopener noreferrer"
+                    class="footer-credit-link">József Schaffer</a> · Based on Pepto’s
+                <a href="https://www.colodore.com" target="_blank" rel="noopener noreferrer"
+                    class="footer-credit-link">Colodore</a> color model
+            </p>
+            <p>Website last updated: 2026 Aug</p>
+
+        </div>
+    </footer>
+
+    <script>
+        // C64 Palette (RGB values)
+        const c64Palette = [
+            [0x04, 0x01, 0x01],  // 00 black
+            [0x33, 0x35, 0x8a],  // 01 blue
+            [0x56, 0x41, 0x01],  // 02 brown
+            [0x76, 0x3d, 0x4b],  // 03 red
+            [0x54, 0x4f, 0x51],  // 04 dark gray
+            [0x7a, 0x47, 0x97],  // 05 purple
+            [0x82, 0x56, 0x38],  // 06 orange
+            [0x79, 0x74, 0x76],  // 07 gray
+            [0x6e, 0x71, 0xc4],  // 08 light blue
+            [0xaa, 0x70, 0x7c],  // 09 light red
+            [0x6c, 0x97, 0x51],  // 0a green
+            [0xac, 0xa7, 0xa9],  // 0b light gray
+            [0x8e, 0xb5, 0xac],  // 0c cyan
+            [0xd3, 0xd3, 0x79],  // 0d yellow
+            [0xb2, 0xe2, 0x98],  // 0e light green
+            [0xfd, 0xfd, 0xfc],  // 0f white
+        ];
+
+        const colorRamp = [2, 2, 3, 3, 5, 5, 7, 7, 14, 14, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 14, 14, 7, 7, 5, 5, 3, 3, 2, 2];
+
+        const whatsNewColorRamp = [
+            2, 2, 3, 3, 5, 5, 7, 7, 14, 14, 15, 15,
+            15, 15, 14, 14, 7, 7, 5, 5, 3, 3, 2, 2,
+        ];
+
+        let rampOffset = 0;
+
+        function getRampColor(index) {
+            const rampIndex = (index + rampOffset) % colorRamp.length;
+            const paletteIndex = colorRamp[rampIndex];
+            const color = c64Palette[paletteIndex];
+            return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        }
+
+        function getWhatsNewRampColor(index) {
+            const rampIndex = (index + rampOffset) % whatsNewColorRamp.length;
+            const paletteIndex = whatsNewColorRamp[rampIndex];
+            const color = c64Palette[paletteIndex];
+            return `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+        }
+
+        function updateColors(spans, button, pulseTarget) {
+            spans.forEach((span, i) => {
+                span.style.color = getRampColor(i);
+            });
+            if (button) {
+                button.style.backgroundColor = button.matches(':hover')
+                    ? getWhatsNewRampColor(0)
+                    : '';
+            }
+            if (pulseTarget) {
+                pulseTarget.style.color = getWhatsNewRampColor(0);
+            }
+            rampOffset++;
+            setTimeout(() => updateColors(spans, button, pulseTarget), 40);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const platformAge = document.getElementById('platform-age');
+            const now = new Date();
+            const releaseYear = Number(platformAge.dataset.releaseYear);
+            const releaseMonth = Number(platformAge.dataset.releaseMonth);
+            const beforeReleaseMonth = now.getMonth() + 1 < releaseMonth;
+            platformAge.textContent = now.getFullYear() - releaseYear - Number(beforeReleaseMonth);
+
+            const h1 = document.querySelector('h1');
+            const text = h1.textContent.trim();
+
+            // Wrap each character (including spaces) in a span
+            h1.innerHTML = text.split('').map(char => {
+                if (char === ' ') {
+                    return '<span>&nbsp;</span>';
+                }
+                return `<span>${char}</span>`;
+            }).join('');
+
+            const spans = h1.querySelectorAll('span');
+            const button = document.querySelector('a[href="https://apps.apple.com/app/c64-graphics-explorer/id6759177386"]');
+            const whatsNewTitle = document.getElementById('whats-new-title');
+            updateColors(spans, button, whatsNewTitle);
+
+            // Balloon game - timer and scoring
+            const balloon = document.getElementById('balloon');
+            let timerInterval = null;
+            let startTime = null;
+            let gameStarted = false;
+            let gameOver = false;
+            let resetAnimationTimeout = null;
+
+            // Create timer display
+            const timer = document.createElement('div');
+            timer.className = 'fixed bottom-5 right-5 text-2xl font-bold font-mono hidden z-[9999]';
+            document.body.appendChild(timer);
+
+            function resetBalloonGame() {
+                clearInterval(timerInterval);
+                clearTimeout(resetAnimationTimeout);
+                timerInterval = null;
+                startTime = null;
+                gameStarted = false;
+                gameOver = false;
+
+                timer.style.display = 'none';
+                timer.style.visibility = 'visible';
+                timer.style.transform = '';
+                timer.style.transition = '';
+                timer.textContent = '';
+
+                balloon.style.transition = 'none';
+                balloon.style.opacity = '0';
+                balloon.style.transform = 'scale(0.5)';
+                balloon.style.pointerEvents = 'none';
+                void balloon.offsetWidth;
+                balloon.style.transition = 'opacity 1000ms ease-out, transform 1000ms ease-out';
+
+                requestAnimationFrame(() => {
+                    balloon.style.opacity = '1';
+                    balloon.style.transform = 'scale(1)';
+                });
+
+                resetAnimationTimeout = setTimeout(() => {
+                    balloon.style.transition = 'transform 5s linear';
+                    balloon.style.opacity = '';
+                    balloon.style.transform = 'none';
+                    balloon.style.pointerEvents = '';
+                    resetAnimationTimeout = null;
+                }, 1000);
+            }
+
+            function updateTimer() {
+                const elapsed = (Date.now() - startTime) / 1000;
+                timer.textContent = elapsed.toFixed(1) + 's';
+                // Use C64 white from palette for timer color
+                const c64White = c64Palette[15];
+                timer.style.color = `rgb(${c64White[0]}, ${c64White[1]}, ${c64White[2]})`;
+            }
+
+            function animateTimerToCenter() {
+                const overlay = document.createElement('div');
+                overlay.className = 'fixed inset-0 bg-black z-[9998]';
+                overlay.style.opacity = '0';
+                overlay.style.transition = 'opacity 0.8s ease-in-out';
+                document.body.appendChild(overlay);
+                requestAnimationFrame(() => { overlay.style.opacity = '0.8'; });
+
+                // "Your score was:" label — fixed above center
+                const label = document.createElement('div');
+                label.textContent = 'Your score was:';
+                label.className = 'fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-[80px] text-lg font-mono text-neutral-100 whitespace-nowrap transition-opacity duration-500 ease-in-out z-[9999]';
+                label.style.opacity = '0';
+                document.body.appendChild(label);
+
+                // Buttons — fixed below center
+                const buttons = document.createElement('div');
+                buttons.className = 'fixed left-1/2 top-1/2 -translate-x-1/2 translate-y-[70px] lg:translate-y-[60px] z-[9999] flex flex-col lg:flex-row gap-4 w-[88vw] max-w-[320px] lg:w-auto lg:max-w-none items-center justify-center transition-opacity duration-700 ease-in-out';
+                buttons.style.opacity = '0';
+                document.body.appendChild(buttons);
+
+                let revealStarted = false;
+                let blinkInterval = null;
+                let revealTimeout = null;
+
+                const closeBtn = document.createElement('button');
+                closeBtn.textContent = 'Close';
+                closeBtn.className = 'inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-white bg-black/50 border border-white/70 hover:bg-black/90 hover:border-white/50 hover:text-neutral-400 transition-colors w-full lg:w-auto';
+
+                function closeScoreOverlay() {
+                    revealStarted = true;
+                    clearInterval(blinkInterval);
+                    clearTimeout(revealTimeout);
+                    overlay.remove();
+                    label.remove();
+                    buttons.remove();
+                    resetBalloonGame();
+                    document.removeEventListener('keydown', closeOnEscape);
+                }
+
+                function closeOnEscape(event) {
+                    if (event.key === 'Escape') {
+                        closeScoreOverlay();
+                    }
+                }
+
+                closeBtn.addEventListener('click', closeScoreOverlay);
+                document.addEventListener('keydown', closeOnEscape);
+                buttons.appendChild(closeBtn);
+
+                const familiarBtn = document.createElement('a');
+                familiarBtn.textContent = 'This balloon looks familiar...';
+                familiarBtn.href = 'remember.html';
+                familiarBtn.className = 'inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold bg-white text-neutral-900 border border-white hover:bg-neutral-300 hover:border-neutral-300 transition-colors no-underline w-full lg:w-auto';
+                buttons.appendChild(familiarBtn);
+
+                // Fly the original timer to center
+                const rect = timer.getBoundingClientRect();
+                const dx = (window.innerWidth / 2) - (rect.left + rect.width / 2);
+                const dy = (window.innerHeight / 2) - (rect.top + rect.height / 2);
+                const revealScoreUI = () => {
+                    if (revealStarted) return;
+                    revealStarted = true;
+                    timer.style.transition = 'none';
+                    label.style.opacity = '1';
+
+                    let blinks = 0;
+                    blinkInterval = setInterval(() => {
+                        timer.style.visibility = timer.style.visibility === 'hidden' ? 'visible' : 'hidden';
+                        blinks++;
+                        if (blinks >= 10) {
+                            clearInterval(blinkInterval);
+                            timer.style.visibility = 'visible';
+                            requestAnimationFrame(() => { buttons.style.opacity = '1'; });
+                        }
+                    }, 300);
+                };
+
+                timer.addEventListener('transitionend', (event) => {
+                    if (event.propertyName === 'transform') {
+                        revealScoreUI();
+                    }
+                }, { once: true });
+
+                // Fallback for browsers where transitionend may not fire reliably.
+                revealTimeout = setTimeout(revealScoreUI, 950);
+
+                timer.style.transition = 'transform 0.8s ease-in-out';
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        timer.style.transform = `translate(${dx}px, ${dy}px) scale(2)`;
+                    });
+                });
+            }
+
+            function checkBalloonExit() {
+                const rect = balloon.getBoundingClientRect();
+                const isOffScreen = rect.right < 0 || rect.left > window.innerWidth ||
+                    rect.bottom < 0 || rect.top > window.innerHeight;
+                if (isOffScreen && !gameOver) {
+                    gameOver = true;
+                    clearInterval(timerInterval);
+                    animateTimerToCenter();
+                }
+            }
+
+            balloon.addEventListener('mouseenter', () => {
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 150;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                balloon.style.transform = `translate(${x}vw, ${y}vh)`;
+
+                // Start timer on first hover
+                if (!gameStarted) {
+                    gameStarted = true;
+                    startTime = Date.now();
+                    timer.style.display = 'block';
+                    timerInterval = setInterval(() => {
+                        updateTimer();
+                        checkBalloonExit();
+                    }, 100);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
